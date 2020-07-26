@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vdoc</title>
+    <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+     -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    
+    <div class="container" style="top: 20px;" id="app">
+        
+        <ul class="list-group">
+            <li v-for="(item, index) in items" :key="index" class="list-group-item">{{item.body}}</li>
+            <li class="list-group-item">Got {{items.length}} video doc from contribulter</li>
+        </ul>
+        
+        <form action="" method="POST" role="form">
+            <legend>Submit Video Doc</legend>
+        
+            <div class="form-group">
+                <input type="text" class="form-control" id="" v-model="url" readonly placeholder="Origin Doccument URL">
+                <input type="text" class="form-control" id="" v-model="vurl" placeholder="Video URL">
+            </div>
+            <button type="button" class="btn btn-primary" @click="postVdoc">Submit</button>
+        </form>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                items:[],
+                url:"",
+                vurl:""
+            },
+            methods:{
+                postVdoc: function () {
+                    if (app.vurl.trim()=="") {
+                        alert("please take valid video doc url")
+                    }else{
+                        alert("Successful post")
+                    }
+                }
+            }
+        })
+        $(function(params) {
+            loadVdoc();
+        })
+        function loadVdoc() {
+            var url = getParameterByName("url");
+            urlTrim = url.replace("https://","");
+            var index = urlTrim.indexOf("/");
+            var label = urlTrim.substr(0,index);
+            var title = urlTrim.substr(index);
+            console.log(label,title)
+            var params = {labels:label}
+            $.get("https://api.github.com/repos/vdoc-online/buzz/issues",params,function (rs) {
+                app.url = url;  
+                app.items = rs;
+            })
+        }
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+            return results == null ? "": decodeURIComponent(results[1]);
+        }
+
+    </script>
+</body>
+</html>
