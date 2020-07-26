@@ -14,3 +14,5 @@
 ```javascript
 <script src="http://www.vdoc.online/assets/vdoc.js"></script>
 ```
+<a id="vdoc" target="_blank">Vdoc</a>
+<script src="http://www.vdoc.online/assets/vdoc.js"></script>
