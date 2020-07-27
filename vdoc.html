@@ -18,7 +18,9 @@
     <div class="container" style="top: 20px;" id="app">
         
         <ul class="list-group">
-            <li v-for="(item, index) in items" :key="index" class="list-group-item">{{item.body}}</li>
+            <li v-for="(item, index) in items" :key="index" class="list-group-item">
+                <a :href="item.body" target="_blank">{{item.body}}</a> by <a :href="item.html_url" target="_blank">{{item.user.login}}</a>
+            </li>
             <li class="list-group-item">Got {{items.length}} video doc from contribulter</li>
         </ul>
         
