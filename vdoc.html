@@ -33,6 +33,7 @@
         </form>
     </div>
     <script type="text/javascript">
+        var vdocRepo = "https://api.github.com/repos/vdoc-online/buzz/issues";
         var app = new Vue({
             el: '#app',
             data: {
@@ -43,9 +44,17 @@
             methods:{
                 postVdoc: function () {
                     if (app.vurl.trim()=="") {
-                        alert("please take valid video doc url")
+                        alert("please take valid video doc url")    
                     }else{
-                        alert("Successful post")
+
+                        var params= {"labels":label,"title":title};
+                        var lt = getLabelAndTitle(app.url)
+                        var label = lt[0];
+                        var title = lt[1];
+                        console.log(label,",",title)
+                         $.post(vdocRepo,params,function (rs) {
+                             console.log(rs)
+                         })
                     }
                 }
             }
@@ -55,16 +64,22 @@
         })
         function loadVdoc() {
             var url = getParameterByName("url");
-            urlTrim = url.replace("https://","");
-            var index = urlTrim.indexOf("/");
-            var label = urlTrim.substr(0,index);
-            var title = urlTrim.substr(index);
+            var lt = getLabelAndTitle(url)
+            var label = lt[0];
+            var title = lt[1];
             console.log(label,title)
             var params = {labels:label}
-            $.get("https://api.github.com/repos/vdoc-online/buzz/issues",params,function (rs) {
+            $.get(vdocRepo,params,function (rs) {
                 app.url = url;  
                 app.items = rs;
             })
+        }
+        function getLabelAndTitle(url) {
+            urlTrim = url.replace("https://","").replace("http://","");
+            var index = urlTrim.indexOf("/");
+            var label = urlTrim.substr(0,index);
+            var title = urlTrim.substr(index);
+            return [label,title]
         }
         function getParameterByName(name) {
             name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
