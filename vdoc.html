@@ -70,7 +70,7 @@
             var label = lt[0];
             var title = lt[1];
             console.log(label,title)
-            var params = {labels:label}
+            var params = {labels:label+",golive",state:"closed"}
             $.get(vdocRepo,params,function (rs) {
                 app.url = url;  
                 app.items = rs;
