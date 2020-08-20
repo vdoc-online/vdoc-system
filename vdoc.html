@@ -17,14 +17,23 @@
     
     <div class="container" style="top: 20px;" id="app">
         
+        
+        <div class="page-header">
+          <h1><small>VDoc</small> Get high quality video explanation</h1>
+          
+        </div>
+        
+        
         <ul class="list-group">
             <li v-for="(item, index) in items" :key="index" class="list-group-item">
                 <a :href="item.body" target="_blank">{{item.body}}</a> by <a :href="item.html_url" target="_blank">{{item.user.login}}</a>
             </li>
-            <li class="list-group-item">Got {{items.length}} video doc from contribulter</li>
+            <li class="list-group-item">Got {{items.length}} video doc from contribulter
+                <a :href="nvdoc" v-model="nvdoc" class="primary" @click="postVdoc">Submit New VDoc</a>
+            </li>
         </ul>
         
-        <form action="" method="POST" role="form">
+        <!-- <form action="" method="POST" role="form">
             <legend>Submit Video Doc</legend>
         
             <div class="form-group">
@@ -32,48 +41,52 @@
                 <input type="text" class="form-control" id="" v-model="vurl" placeholder="Video URL">
             </div>
             <button type="button" class="btn btn-primary" @click="postVdoc">Submit</button>
-        </form>
+        </form> -->
     </div>
     <script type="text/javascript">
         var vdocRepo = "https://api.github.com/repos/vdoc-online/buzz/issues";
+        var submitRepo = "https://github.com/vdoc-online/buzz/issues/new?assignees=smarkm%2C+An-Haijun&template=submit-vdoc.md"
         var app = new Vue({
             el: '#app',
             data: {
                 items:[],
-                url:"",
-                vurl:""
+                docDomain:"",
+                title:"",
+                vurl:"",
+                nvdoc:""
             },
             methods:{
                 postVdoc: function () {
-                    if (app.vurl.trim()=="") {
-                        alert("please take valid video doc url")    
-                    }else{
 
-                        var params= {"labels":label,"title":title};
-                        var lt = getLabelAndTitle(app.url)
-                        var label = lt[0];
-                        var title = lt[1];
-                        console.log(label,",",title)
-                         $.post(vdocRepo,params,function (rs) {
-                             console.log(rs)
-                         })
-                    }
+                       
+
+                        //  $.get(submitRepo,params,function (rs) {
+                        //      console.log(rs)
+                        //  })
                 }
             }
         })
         $(function(params) {
             loadVdoc();
+              
+               var docDomain = app.docDomain;
+               var title = app.title;
+                app.nvdoc = submitRepo+"&labels=need+review,"+docDomain+"&title="+title;
+                console.log(app.nvdoc,",",title)
         })
         function loadVdoc() {
             var url = getParameterByName("url");
             var lt = getLabelAndTitle(url)
             var label = lt[0];
             var title = lt[1];
+            app.docDomain = label;
+            app.title = title;
             console.log(label,title)
             var params = {labels:label+",golive",state:"closed"}
             $.get(vdocRepo,params,function (rs) {
                 app.url = url;  
                 app.items = rs;
+                console.log(rs)
             })
         }
         function getLabelAndTitle(url) {

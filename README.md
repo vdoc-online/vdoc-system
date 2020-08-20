@@ -6,11 +6,13 @@ Now we are still on test phase, we will use https://github.com/vdoc-online/buzz 
 3. All submit vdoc will as an issue on [`vdco-system`](http://www.github.com/vdoc-online/vdoc-system/issues) repo, and the domain as `label` url as issue `title`
 
 ## How to intergrateion
-1. Add Vdoc Element with id `vdoc`
+1. Apply intergration here [vdoc-sre](https://github.com/vdoc-online/vdoc-sre) with your doc domain information as an issue, system manager will add your domain to the database repo, then follow below steps for intergration
+   
+2. Add Vdoc Element with id `vdoc`
 ```html
 <a id="vdoc" target="_blank">Vdoc</a> <!-- Entry HTML Element -->
 ```
-2. Import Vdoc js
+3. Import Vdoc js
 ```javascript
 <script src="http://www.vdoc.online/assets/vdoc.js"></script>
 ```
