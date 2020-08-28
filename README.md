@@ -1,6 +1,6 @@
 ## Welcome to Video Doc system
 VDoc system aim at linking the high quality video to the related document,the video will review by more experiencer, so when beginners read the  document they can find more related video  to get more explaination.
-Nor ow we are still on test phase, we will use https://github.com/vdoc-online/buzz as issues repo, after basic testing we will move the issues repo here and go live
+Now we are still on test phase, we will use https://github.com/vdoc-online/buzz as issues repo, after basic testing we will move the issues repo here and go live
 ## How vdoc-system work now
 1. Add vdoc support on your site
 2. When user click vdoc, it will list all sumibt video documents on new page, user can submit the new video document on the page
