@@ -24,3 +24,9 @@ Now we are still on test phase, we will use https://github.com/vdoc-online/buzz 
 Join Slack 
 
 [https://vdoc-online.slack.com](https://join.slack.com/t/vdoc-online/shared_invite/zt-gfhczmvk-nuBKAG9lPaMyTM2VDcoWBQ)
+
+
+## Roadmap
+|Version|Descr|Timeline|Note
+|-|-|-|-|
+|0.0.1|Initicve|1/9 2020|
