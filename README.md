@@ -30,5 +30,5 @@ Join Slack
 |Version|Descr|Timeline|Note|
 |-|-|-:|-|
 |0.0.1|Initicve|1/9 2020|done|
-|0.0.2|Support Post Fromwork<br>`Jekyll`, `hexo`|30/10 2020|working|
-|0.03|...|...|...|
+|0.0.2|Support Post Framework<br>`Jekyll`, `hexo`|30/10 2020|working|
+|0.0.3|...|...|...|
